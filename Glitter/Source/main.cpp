@@ -13,7 +13,6 @@
 #include "Input.hpp"
 #include "Window.hpp"
 #include "Shader.hpp"
-#include "Renderer.hpp"
 #include "Model.hpp"
 #include "Camera.hpp"
 
