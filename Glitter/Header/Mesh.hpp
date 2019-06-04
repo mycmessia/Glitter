@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <Shader.h>
+#include <Shader.hpp>
 
 #include <string>
 #include <fstream>
