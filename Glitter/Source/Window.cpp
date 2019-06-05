@@ -10,9 +10,9 @@ Window::Window (int sw, int sh) : screenWidth (sw), screenHeight (sh)
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint (GLFW_RESIZABLE, GL_FALSE);
-    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);   // This is vital on MacOSX
+    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
-    glWindow = glfwCreateWindow (screenWidth, screenHeight, "Breakout", nullptr, nullptr);
+    glWindow = glfwCreateWindow (screenWidth, screenHeight, "Yuchen's Rendering Project", nullptr, nullptr);
     glfwMakeContextCurrent (glWindow);
     
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

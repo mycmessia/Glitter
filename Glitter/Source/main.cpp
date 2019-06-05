@@ -8,29 +8,29 @@
 #include <Model.hpp>
 #include <Camera.hpp>
 
-int main (int argc, const char * argv[])
+int main(int argc, const char * argv[])
 {
-    Window window (800, 600);
+    Window window(800, 600);
 
-    Camera camera (glm::vec3 (0.0f, 0.0f, 3.0f));
+    Camera camera(glm::vec3 (0.0f, 0.0f, 3.0f));
     
-    Shader ourShader ("../Glitter/Shader/model_loading.vs", "../Glitter/Shader/model_loading.fs");
+    Shader ourShader("../Glitter/Shader/model_loading.vs", "../Glitter/Shader/model_loading.fs");
     
-    Model mountain ("../Glitter/Resource/Object/nanosuit/nanosuit.obj");
+    Model mountain("../Glitter/Resource/Object/nanosuit/nanosuit.obj");
     
     glEnable (GL_DEPTH_TEST);
     
-    while (!window.IsClose ())
+    while (!window.IsClose())
     {
-        window.CalcDeltaTime ();
+        window.CalcDeltaTime();
         
-        window.Clear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        window.Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        Input::SetDefalutInputs ();
+        Input::SetDefalutInputs();
         
-        window.PullEvents ();
+        window.PullEvents();
         
-        camera.HandleInput (window.GetDeltaTime ());
+        camera.HandleInput(window.GetDeltaTime ());
         
 		ourShader.use();
 

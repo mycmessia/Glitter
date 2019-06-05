@@ -2,7 +2,10 @@
 #include <Camera.hpp>
 
 Camera::Camera (glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
-: Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+	: Front(glm::vec3(0.0f, 0.0f, -1.0f))
+	, MovementSpeed(SPEED)
+	, MouseSensitivity(SENSITIVTY)
+	, Zoom(ZOOM)
 {
     this->Position = position;
     this->WorldUp = up;
@@ -12,7 +15,10 @@ Camera::Camera (glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
 }
 
 Camera::Camera (GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch)
-: Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+	: Front(glm::vec3(0.0f, 0.0f, -1.0f))
+	, MovementSpeed(SPEED)
+	, MouseSensitivity(SENSITIVTY)
+	, Zoom(ZOOM)
 {
     this->Position = glm::vec3(posX, posY, posZ);
     this->WorldUp = glm::vec3(upX, upY, upZ);
@@ -62,12 +68,18 @@ void Camera::ProcessMouseMovement (GLfloat xoffset, GLfloat yoffset, GLboolean c
 
 void Camera::ProcessMouseScroll (GLfloat yoffset)
 {
-    if (this->Zoom >= 1.0f && this->Zoom <= 45.0f)
-        this->Zoom -= yoffset;
-    if (this->Zoom <= 1.0f)
-        this->Zoom = 1.0f;
-    if (this->Zoom >= 45.0f)
-        this->Zoom = 45.0f;
+	if (this->Zoom >= 1.0f && this->Zoom <= 45.0f)
+	{
+		this->Zoom -= yoffset;
+	}
+	else if (this->Zoom <= 1.0f)
+	{
+		this->Zoom = 1.0f;
+	}
+	if (this->Zoom >= 45.0f)
+	{
+		this->Zoom = 45.0f;
+	}
 }
 
 void Camera::UpdateCameraVectors ()
@@ -85,7 +97,6 @@ void Camera::UpdateCameraVectors ()
 
 void Camera::HandleInput (float deltaTime)
 {
-    // Move
     if (Input::IsKeyDown (GLFW_KEY_W))
     {
         ProcessKeyboard (FORWARD, deltaTime);
