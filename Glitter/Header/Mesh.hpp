@@ -1,9 +1,6 @@
 #pragma once
 
-#ifndef MESH_H
-#define MESH_H
-
-#include <glad/glad.h> // holds all OpenGL type declarations
+#include <glad/glad.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -39,13 +36,11 @@ struct Texture {
 
 class Mesh {
 public:
-	/*  Mesh Data  */
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 	unsigned int VAO;
 
-	/*  Functions  */
 	// constructor
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
 	{
@@ -139,5 +134,3 @@ private:
 		glBindVertexArray(0);
 	}
 };
-
-#endif

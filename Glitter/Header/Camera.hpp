@@ -1,19 +1,8 @@
-//
-//  Camera.hpp
-//  OGLEngine
-//
-//  Created by 梅宇宸 on 17/1/3.
-//  Copyright © 2017年 梅宇宸. All rights reserved.
-//
+#pragma once
 
-#ifndef Camera_hpp
-#define Camera_hpp
-
-// Std. Includes
 #include <vector>
 
-// GL Includes
-#include <glad/glad.h> // holds all OpenGL type declarations
+#include <glad/glad.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -84,5 +73,3 @@ private:
     // Calculates the front vector from the Camera's (updated) Eular Angles
     void UpdateCameraVectors ();
 };
-
-#endif /* Camera_hpp */

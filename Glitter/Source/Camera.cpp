@@ -1,13 +1,5 @@
-//
-//  Camera.cpp
-//  OGLEngine
-//
-//  Created by 梅宇宸 on 17/1/3.
-//  Copyright © 2017年 梅宇宸. All rights reserved.
-//
-
-#include "Input.hpp"
-#include "Camera.hpp"
+#include <Input.hpp>
+#include <Camera.hpp>
 
 Camera::Camera (glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
 : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)

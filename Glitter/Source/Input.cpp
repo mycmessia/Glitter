@@ -1,12 +1,4 @@
-//
-//  Input.cpp
-//  OGLEngine
-//
-//  Created by 梅宇宸 on 17/1/3.
-//  Copyright © 2017年 梅宇宸. All rights reserved.
-//
-
-#include "Input.hpp"
+#include <Input.hpp>
 
 GLboolean Input::keysProcessed[1024] = {false};
 GLboolean Input::keys[1024] = {false};

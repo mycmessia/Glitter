@@ -1,17 +1,6 @@
-//
-//  Texture2D.hpp
-//  OpenGLBreakout
-//
-//  Created by 梅宇宸 on 16/12/23.
-//  Copyright © 2016年 梅宇宸. All rights reserved.
-//
-
-#ifndef Texture2D_hpp
-#define Texture2D_hpp
+#pragma once
 
 #include <glad/glad.h>
-
-#define TEXTURE_FULL_DIR "/Users/meiyuchen/Projects/OGLEngine/OGLEngine/Textures/"
 
 // Texture2D is able to store and configure a texture in OpenGL.
 // It also hosts utility functions for easy management.
@@ -37,4 +26,3 @@ public:
     // Binds the texture as the current active GL_TEXTURE_2D texture object
     void Bind() const;
 };
-#endif /* Texture2D_hpp */

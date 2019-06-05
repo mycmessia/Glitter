@@ -1,13 +1,4 @@
-//
-//  Window.hpp
-//  GameEngine
-//
-//  Created by 梅宇宸 on 17/1/2.
-//  Copyright © 2017年 梅宇宸. All rights reserved.
-//
-
-#ifndef Window_hpp
-#define Window_hpp
+#pragma once
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -53,5 +44,3 @@ private:
     float deltaTime;
     float lastTime;
 };
-
-#endif /* Window_hpp */

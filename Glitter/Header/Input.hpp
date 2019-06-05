@@ -1,13 +1,4 @@
-//
-//  Input.hpp
-//  OGLEngine
-//
-//  Created by 梅宇宸 on 17/1/3.
-//  Copyright © 2017年 梅宇宸. All rights reserved.
-//
-
-#ifndef Input_hpp
-#define Input_hpp
+#pragma once
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -36,5 +27,3 @@ private:
     
     static double mouseScrollOffsetY;
 };
-
-#endif /* Input_hpp */

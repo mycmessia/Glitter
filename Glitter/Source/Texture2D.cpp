@@ -1,12 +1,4 @@
-//
-//  Texture2D.cpp
-//  OpenGLBreakout
-//
-//  Created by 梅宇宸 on 16/12/23.
-//  Copyright © 2016年 梅宇宸. All rights reserved.
-//
-
-#include "Texture2D.hpp"
+#include <Texture2D.hpp>
 
 Texture2D::Texture2D () :
     Width (0), Height (0),
