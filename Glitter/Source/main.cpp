@@ -8,6 +8,7 @@
 #include <Model.hpp>
 #include <Camera.hpp>
 #include <Texture2D.hpp>
+#include <Quad.h>
 
 int main(int argc, const char * argv[])
 {
@@ -18,7 +19,7 @@ int main(int argc, const char * argv[])
     Shader modelShader("../Glitter/Shader/model_loading.vs", "../Glitter/Shader/model_loading.fs");
 	Shader quadShader("../Glitter/Shader/quad.vs", "../Glitter/Shader/quad.fs");
 	quadShader.use();
-	quadShader.setInt("screenTexture", 0);
+	quadShader.setInt("screenTexture", 1);
     
     Model nano("../Glitter/Resource/Object/nanosuit/nanosuit.obj");
 
@@ -42,26 +43,7 @@ int main(int argc, const char * argv[])
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	float quadVertices[] = {
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		-1.0f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  1.0f, 0.0f,
-
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		-0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  1.0f,  1.0f, 1.0f
-	};
-
-	unsigned int quadVAO, quadVBO;
-	glGenVertexArrays(1, &quadVAO);
-	glGenBuffers(1, &quadVBO);
-	glBindVertexArray(quadVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+	Quad quad;
     
     while (!window.IsClose())
     {
@@ -80,7 +62,6 @@ int main(int argc, const char * argv[])
 		window.Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		modelShader.use();
-
 		glm::mat4 projection = glm::perspective(camera.Zoom, (float)window.GetScreenWidth() / (float)window.GetScreenHeight(), 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		modelShader.setMat4("projection", projection);
@@ -95,18 +76,12 @@ int main(int argc, const char * argv[])
 
 		window.Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		modelShader.use();
 		nano.Draw(modelShader);
 
-		glDisable(GL_DEPTH_TEST);
-
-		quadShader.use();
-		glBindTexture(GL_TEXTURE_2D, fboTexture.ID);
-		glActiveTexture(0);
-		glBindVertexArray(quadVAO);
-		
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		quad.Draw(quadShader, fboTexture.ID);
         
-        window.SwapBuffer ();
+        window.SwapBuffer();
     }
 
 	glDeleteFramebuffers(1, &fbo);
