@@ -28,12 +28,10 @@ Quad::Quad()
 void Quad::Draw(Shader& shader, GLuint textureID)
 {
 	shader.use();
-	// This equals to glActiveTexture(GL_TEXTURE1); + glBindTexture(GL_TEXTURE_2D, textureID);
-	glBindMultiTextureEXT(GL_TEXTURE1, GL_TEXTURE_2D, textureID);
+	glBindMultiTextureEXT(GL_TEXTURE1, GL_TEXTURE_2D, textureID); 	// This equals to glActiveTexture(GL_TEXTURE1); + glBindTexture(GL_TEXTURE_2D, textureID);
 	glBindVertexArray(quadVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
-	// always good practice to set everything back to defaults once configured.
 	glActiveTexture(GL_TEXTURE0);
 }
 

@@ -95,16 +95,26 @@ private:
 		{
 			Vertex vertex;
 			glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
+			
 			// positions
 			vector.x = mesh->mVertices[i].x;
 			vector.y = mesh->mVertices[i].y;
 			vector.z = mesh->mVertices[i].z;
 			vertex.Position = vector;
+			
 			// normals
-			vector.x = mesh->mNormals[i].x;
-			vector.y = mesh->mNormals[i].y;
-			vector.z = mesh->mNormals[i].z;
-			vertex.Normal = vector;
+			if (mesh->mNormals)
+			{
+				vector.x = mesh->mNormals[i].x;
+				vector.y = mesh->mNormals[i].y;
+				vector.z = mesh->mNormals[i].z;
+				vertex.Normal = vector;
+			}
+			else
+			{
+				vertex.Normal = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+			
 			// texture coordinates
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
 			{
@@ -116,17 +126,58 @@ private:
 				vertex.TexCoords = vec;
 			}
 			else
+			{
 				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+			}
+			
 			// tangent
-			vector.x = mesh->mTangents[i].x;
-			vector.y = mesh->mTangents[i].y;
-			vector.z = mesh->mTangents[i].z;
-			vertex.Tangent = vector;
+			if (mesh->mTangents)
+			{
+				vector.x = mesh->mTangents[i].x;
+				vector.y = mesh->mTangents[i].y;
+				vector.z = mesh->mTangents[i].z;
+				vertex.Tangent = vector;
+			}
+			else
+			{
+				vertex.Tangent = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+
 			// bitangent
-			vector.x = mesh->mBitangents[i].x;
-			vector.y = mesh->mBitangents[i].y;
-			vector.z = mesh->mBitangents[i].z;
-			vertex.Bitangent = vector;
+			if (mesh->mBitangents)
+			{
+				vector.x = mesh->mBitangents[i].x;
+				vector.y = mesh->mBitangents[i].y;
+				vector.z = mesh->mBitangents[i].z;
+				vertex.Bitangent = vector;
+			}
+			else
+			{
+				vertex.Bitangent = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+
+			// vertex colors
+			glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
+			if (mesh->mColors[0])
+			{
+				glm::vec4 vec;
+				vec.r = mesh->mColors[0][i].r;
+				vec.g = mesh->mColors[0][i].g;
+				vec.b = mesh->mColors[0][i].b;
+				vec.a = mesh->mColors[0][i].a;
+				color = vec;
+			}
+			else if (mesh->mMaterialIndex)	// material colors
+			{
+				aiMaterial* mtl = scene->mMaterials[mesh->mMaterialIndex];
+				aiColor3D diffuseColor;
+				if (AI_SUCCESS == mtl->Get(AI_MATKEY_COLOR_DIFFUSE, diffuseColor))
+				{
+					color = glm::vec4(diffuseColor.r, diffuseColor.g, diffuseColor.b, 1.0);
+				}
+			}
+			vertex.Color = color;
+
 			vertices.push_back(vertex);
 		}
 		// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.

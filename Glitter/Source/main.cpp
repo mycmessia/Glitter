@@ -76,7 +76,6 @@ int main(int argc, const char * argv[])
 
 		window.Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		modelShader.use();
 		nano.Draw(modelShader);
 
 		quad.Draw(quadShader, fboTexture.ID);
