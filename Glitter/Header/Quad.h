@@ -9,7 +9,7 @@ public:
 	void Draw(class Shader& shader, GLuint textureID);
 
 private:
-	unsigned int quadVAO;
-	unsigned int quadVBO;
-	float quadVertices[24];
+	unsigned int VAO;
+	unsigned int VBO;
+	float vertices[24];
 };

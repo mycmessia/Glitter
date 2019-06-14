@@ -9,6 +9,7 @@
 #include <Camera.hpp>
 #include <Texture2D.hpp>
 #include <Quad.h>
+#include <Cube.h>
 
 int main(int argc, const char * argv[])
 {
@@ -20,6 +21,7 @@ int main(int argc, const char * argv[])
 	Shader quadShader("../Glitter/Shader/quad.vs", "../Glitter/Shader/quad.fs");
 	quadShader.use();
 	quadShader.setInt("screenTexture", 1);
+	Shader cubeShader("../Glitter/Shader/cube.vs", "../Glitter/Shader/cube.fs");
     
     Model nano("../Glitter/Resource/Object/nanosuit/nanosuit.obj");
 
@@ -44,6 +46,7 @@ int main(int argc, const char * argv[])
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	Quad quad;
+	Cube cube;
     
     while (!window.IsClose())
     {
@@ -79,6 +82,31 @@ int main(int argc, const char * argv[])
 		nano.Draw(modelShader);
 
 		quad.Draw(quadShader, fboTexture.ID);
+
+		cubeShader.use();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-1.75f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.01f, 0.01f));
+		cubeShader.setMat4("model", model);
+		cubeShader.setVec4("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		cube.Draw(cubeShader);
+
+		cubeShader.setMat4("projection", projection);
+		cubeShader.setMat4("view", view); 
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-2.0f, 0.25f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.01f, 0.5f, 0.01f));
+		cubeShader.setMat4("model", model);
+		cubeShader.setVec4("color", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		cube.Draw(cubeShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.25f));
+		model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.5f));
+		cubeShader.setMat4("model", model);
+		cubeShader.setVec4("color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+		cube.Draw(cubeShader);
         
         window.SwapBuffer();
     }
