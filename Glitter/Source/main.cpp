@@ -15,7 +15,7 @@ int main(int argc, const char * argv[])
 {
     Window window(800, 600);
 
-    Camera camera(glm::vec3 (0.0f, 0.0f, 3.0f));
+    Camera camera(glm::vec3 (0.0f, 3.0f, 3.0f));
     
     Shader modelShader("../Glitter/Shader/model_loading.vs", "../Glitter/Shader/model_loading.fs");
 	Shader quadShader("../Glitter/Shader/quad.vs", "../Glitter/Shader/quad.fs");
@@ -23,7 +23,8 @@ int main(int argc, const char * argv[])
 	quadShader.setInt("screenTexture", 1);
 	Shader cubeShader("../Glitter/Shader/cube.vs", "../Glitter/Shader/cube.fs");
     
-    Model nano("../Glitter/Resource/Object/nanosuit/nanosuit.obj");
+    Model ellia("../Glitter/Resource/Object/ellia-halloween/ellia-halloween.dae");
+	Model terrain("../Glitter/Resource/Object/MiniYosshiHomeGalaxy/MiniYosshiHomeGalaxy.obj");
 
 	unsigned int fbo;
 	glGenFramebuffers(1, &fbo);
@@ -73,40 +74,48 @@ int main(int argc, const char * argv[])
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		modelShader.setMat4("model", model);
-		nano.Draw(modelShader);
+		ellia.Draw(modelShader);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		window.Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		nano.Draw(modelShader);
+		ellia.Draw(modelShader);
+
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 26.0f));
+		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		modelShader.setMat4("model", model);
+		terrain.Draw(modelShader);
 
 		quad.Draw(quadShader, fboTexture.ID);
 
-		cubeShader.use();
+		// Render coordination system
+		{
+			cubeShader.use();
 
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-1.75f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 0.01f, 0.01f));
-		cubeShader.setMat4("model", model);
-		cubeShader.setVec4("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		cube.Draw(cubeShader);
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(-1.75f, 0.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.5f, 0.01f, 0.01f));
+			cubeShader.setMat4("model", model);
+			cubeShader.setVec4("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			cube.Draw(cubeShader);
 
-		cubeShader.setMat4("projection", projection);
-		cubeShader.setMat4("view", view); 
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-2.0f, 0.25f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.01f, 0.5f, 0.01f));
-		cubeShader.setMat4("model", model);
-		cubeShader.setVec4("color", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-		cube.Draw(cubeShader);
+			cubeShader.setMat4("projection", projection);
+			cubeShader.setMat4("view", view);
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(-2.0f, 0.25f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.01f, 0.5f, 0.01f));
+			cubeShader.setMat4("model", model);
+			cubeShader.setVec4("color", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+			cube.Draw(cubeShader);
 
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.25f));
-		model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.5f));
-		cubeShader.setMat4("model", model);
-		cubeShader.setVec4("color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		cube.Draw(cubeShader);
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.25f));
+			model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.5f));
+			cubeShader.setMat4("model", model);
+			cubeShader.setVec4("color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+			cube.Draw(cubeShader);
+		}
         
         window.SwapBuffer();
     }
