@@ -11,7 +11,9 @@ The goal for this project is to render a scene with different techniques.
 Here are some screenshots of this project.
 
 Framebuffer commit fc83e54
+
 ![](https://github.com/mycmessia/Glitter/blob/master/FramebufferScreenshot.png)
 
-ShadowMapping
+ShadowMapping commit fe40a04
+
 ![](https://github.com/mycmessia/Glitter/blob/master/ShadowMappingScreenshot.png)
